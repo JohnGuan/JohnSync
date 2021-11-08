@@ -1,0 +1,59 @@
+{
+  "name": "john-sync",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@douyinfe/semi-ui": "^2.0.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "electron-is-packaged": "^1.0.2",
+    "electron-root-path": "^1.0.16",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "4.0.3",
+    "web-vitals": "^1.0.1"
+  },
+  "main": "electron/main.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "concurrently -k \"yarn:start\" \"yarn:electron\"",
+    "electron": "wait-on tcp:3000 && electron ."
+  },
+  "build": {
+    "extraFiles": [
+      {
+        "from": "electron/resources/${os}/${arch}",
+        "to": "Resources/bin",
+        "filter": ["**/*"]
+      }
+    ]
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "concurrently": "^6.3.0",
+    "electron": "^15.3.0",
+    "electron-is-dev": "^2.0.0",
+    "wait-on": "^6.0.0"
+  }
+}
