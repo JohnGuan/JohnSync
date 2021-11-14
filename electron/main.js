@@ -1,13 +1,18 @@
 const path = require('path');
+const { spawn } = require('child_process');
 
 const { app, BrowserWindow } = require('electron');
 const isDev = require('electron-is-dev');
 
+
+// Import Binaries Path
 const { syncthingPath } = require('./binaries-path');
+// Set Syncthing Config File Path 
 const syncthingConfigPath = path.join(app.getPath('userData'), 'syncthing')
-const { spawn } = require('child_process');
+// Create Syncthing child_process
 const syncthing = spawn(syncthingPath, ['--no-browser', '--home=' + syncthingConfigPath]);
 
+// Handle Syncthin output and events
 syncthing.stdout.on('data', (data) => {
   console.log(`syncthing stdout: ${data}`);
 });
@@ -17,6 +22,7 @@ syncthing.stderr.on('data', (data) => {
 syncthing.on('close', (code) => {
   console.log(`syncthing exited with code ${code}`);
 });
+
 
 
 function createWindow() {
